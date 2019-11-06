@@ -1,4 +1,4 @@
-#!usr/bin.env ruby
+#!usr/bin/env ruby
 
 # Use the class method to know what type an object is.
 word = 'Ruby'
