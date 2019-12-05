@@ -14,6 +14,5 @@ person.last_name = "Solo"
 puts person.initial_and_last_name
 
 # Creating an animal class making use of its @noise attribute.
-pig = Animal.new
-pig.noise = "Oink!"
+pig = Animal.new({noise: "Oink!"})
 puts pig.noise
