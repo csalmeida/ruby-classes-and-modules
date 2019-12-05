@@ -26,7 +26,7 @@ class Animal
   end
 end
 
-# Ruby's convetion of setting read/write methods:
+# Ruby's convention of setting read/write methods:
 class Animal
   def noise
     @noise
@@ -41,4 +41,21 @@ end
 pig.noise=('Oink, oink, oink!')
 # Using Rybu's syntax sugar, it looks like a value is being set with the noise= method.
 pig.noise = 'Oink, oink!'
+puts pig.noise
+
+# Ruby's shorthand of setting read/write methods:
+class Animal
+  attr_reader :noise
+  attr_writer :noise
+end
+
+pig.noise = 'Oink?'
+puts pig.noise
+
+# Ruby's most common of setting read/write methods:
+class Animal
+  attr_reader :noise
+end
+
+pig.noise = 'Oink...'
 puts pig.noise
