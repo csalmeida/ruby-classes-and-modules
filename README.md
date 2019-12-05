@@ -13,6 +13,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
 - [Classes](#classes)
   - [Define a class](#define-a-class)
   - [Instances](#instances)
+  - [Attributes](#attributes)
 </details>
 
 # Getting Started
@@ -33,7 +34,7 @@ Should return something similar to:
 
 Ruby is an Object Oriented Programming (OOP) language and custom classes and modules can be defined to improve how code is organized with the aim to make it easier to maintain and add new features.
 
-Classes provide templates for creating objects or instances of a class that have unique attributes and behaviour and can interact with eachother in complex ways.
+Classes provide templates for creating objects or instances of a class that have unique attributes and behavior and can interact with each other in complex ways.
 
 # Classes
 
@@ -95,7 +96,7 @@ array = Array.new # Instance of an array
 hash = Hash.new # Instance of a hash
 ```
 
-Objects can be instanciated from custom classes as well:
+Objects can be instantiated from custom classes as well:
 
 ```ruby
 # classes/instances.rb
@@ -107,6 +108,13 @@ person_2 = Person.new
 ```
 
 Each instance is based on its respective class, however they might hold different values. For example, a `String` class can hold any combination of characters, `"Ruby"` or `7u3y`. Both are strings but have different values.
+
+This can be observed by checking the `object_id` of both instances of `Person`. Each value will be different, meaning that each one is taking a different part of memory to run.
+
+```ruby
+person_1.object_id # 70142496862940
+person_2.object_id # 70142496862780
+```
 
 A [custom method](https://github.com/csalmeida/ruby-fundamentals#custom-methods) can be added to a class and used on any instance:
 
@@ -131,4 +139,200 @@ person = Person.new
 puts person.greet # Hello!
 ```
 
-The example above shows the file where the `Person` class is defined being imported into a main script file. Then a `Person` can be instanciated and methods associated with that object can be used.
+The example above shows the file where the `Person` class is defined being imported into a main script file. Then a `Person` can be instantiated and methods associated with that object can be used.
+
+## Attributes
+
+Attributes are values that persist in the instance of a class and are what makes an instance unique. For instance, a `Person` might be named `Salia` and another named `Joe`, this value would live in an attribute, part of that instance.
+
+Attributes can be seen as properties of an object and in some programming languages that is how they are called.
+
+It might be easier to think of it as properties in some cases, as for instance a car could be *green*. Green is a property of a car but it could be any other color and different cars will have other colors.
+
+A house might have *two rooms* and *one bathroom* but other might have a different number of rooms and bathrooms. These are all properties a house can have but in Ruby they are called attributes.
+
+Attributes will be stored inside instance variables and are set using [variable scope indicators](https://github.com/csalmeida/ruby-fundamentals#variable-scope-indicators).
+
+```ruby
+# classes/attributes.rb
+class Animal
+  def make_noise
+    @noise
+  end
+
+  def set_noise
+    @noise = 'Oink!'
+  end
+end
+```
+
+In the example above the instance variable `@noise` is used in two methods, one to set it and another to return it.
+
+```ruby
+# classes/attributes.rb
+pig = Animal.new
+pig.set_noise
+puts pig.make_noise
+```
+
+When an instance of `Animal` is created, the value of `@noise` persists in the instance. It can be accessed in both methods and this is [an important difference from local variables in terms of scope](https://github.com/csalmeida/ruby-fundamentals#variable-scope). **An instance of a class always has access to its instance variables.** From anywhere inside its class definition it can pull values from instance variables.
+
+### Reader/Writer Methods
+
+In some cases instance variables might require to be accessed outside an instance. It was already established this is not possible but since methods are accessible outside an instance, these can be used to get access to an instance variable.
+
+These methods are called reader/writer methods, also known as getter/setter methods in other programming languages. These are methods that allow reading or writing to an attribute.
+
+A more traditional way of naming these methods would be using the `get` and `set` keywords to name them, with set taking an argument:
+
+```ruby
+# classes/attributes.rb
+class Animal
+  def get_noise
+    @noise
+  end
+
+  def set_noise(value)
+    @noise = value
+  end
+end
+```
+
+However, Ruby has a convention for setting these methods which aid their use when an object is instantiated:
+
+```ruby
+# classes/attributes.rb
+class Animal
+  def noise
+    @noise
+  end
+
+  def noise=(value)
+    @noise = value
+  end
+end
+```
+
+This means that when, for instance, `pig.noise` is called it will return the value for `@noise`. However, when `pig.noise('Oooooink!')` is called it *won't* set the value for `@noise` in that instance since that is not the name of the method defined, `noise=` is:
+
+```ruby
+# classes/attributes.rb
+pig.noise=('Oink, oink, oink!')
+pig.noise # Oink, oink, oink!
+```
+
+This syntax is not the most common but it conveys that `noise=` is the name of the method. Defining a method with that name allows Ruby's sugar syntax to be used and call it in a way that it seems the instance variable value is being set instead:
+
+```ruby
+# classes/attributes.rb
+pig.noise = 'Oink, oink!'
+pig.noise # Oink, oink!
+```
+
+Ruby is aware that it is a method despite being called this way. It one of these methods is left out it would create a case where an instance variable is either read only or write only.
+
+### Attribute Methods
+
+Attribute methods are sometimes called `attr_*`, with `*` being a placeholder for the three methods currently available:
+
+- `attr_reader`
+- `attr_writer`
+- `attr_accessor`
+
+Attribute start with `attr_` and they are referenced as *attribute writer*, *attribute accessor* even if not all of it is typed out.
+
+This adds another way of making attributes available outside an instance. For example, using `attr_reader :noise` replaces the method defined earlier to access it:
+
+```ruby
+# Using attribute reader is the same as the method below.
+attr_reader :noise
+# Replaced by attr_reader
+def noise
+  @noise
+end
+```
+
+The writer method could be replaced with `attr_writer` and would have the same effect:
+
+```ruby
+# Using attribute reader is the same as the method below.
+attr_writer :noise
+
+# Replaced by attr_writer
+def noise=(value)
+  @noise = value
+end
+```
+
+The third method (`attr_accessor`) can be used when both read/write is needed. This allows an attribute to be both read and set in one line:
+
+```ruby
+# Using attribute reader is the same as the method below.
+attr_accessor :noise
+# Replaced by attr_accessor
+def noise
+  @noise
+end
+# Replaced by attr_accessor
+def noise=(value)
+  @noise = value
+end
+```
+
+The `attr_accessor` method is commonly used in classes, multiple attributes can be added in one go:
+
+```ruby
+# classes/attributes.rb
+attr_accessor :noise, :age
+```
+
+These can be used interchangeably with methods since there might be cases where it could make sense to have a custom read/write method.
+
+For example, in the class `Radio` below, `@volume` is readable and a custom method is defined to set it. This allows to control how the value is received.
+
+However, the instance variable is being changed directly in `crank_it_up` and being accessed directly in `volume_status` instead of using `attr_reader`.
+
+```ruby
+class Radio
+  # Volume attribute can be read.
+  attr_reader :volume
+  
+  # Write method is custom and checks if the value is as expected before setting it.
+  def volume=(value)
+    return if value < 1 || value > 10
+    @volume = value
+  end
+
+  # Bypasses the writter method and sets volume to a value it wouldn't normally accept.
+  def crank_it_up
+    @volume = 11
+  end
+
+  def volume_status
+    "Current volume #{@volume}"
+  end
+```
+
+The example above is valid, however the convention is to use the `self` keyword when setting an attribute (`self.volume`) and omit it when `volume` is being read:
+
+```ruby
+  #...
+  def crank_it_up
+    self.volume = 11
+  end
+
+  def volume_status
+    "Current volume #{volume}"
+  end
+  #...
+```
+
+When setting a value, `self` is used to make it clear to Ruby that the value is being set to an instance variable rather than a local one. When a value is being read it is convention to omit it but it would be valid if `self` was present there.
+
+Using `self` boils down to a few points:
+
+- Use `self` to reference the current instance from inside the instance.
+- Add `self` when calling writer methods (`self.first_name=`)
+  - Helps Ruby understand that it is calling a method.
+- Omit `self` when calling any other method (`first_name`)
+- Including `self` is always going to be the safest choice.
