@@ -15,7 +15,8 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Instances](#instances)
   - [Attributes](#attributes)
   - [Method Access Control](#method-access-control)
-  - [Challenge: Dice](challenges/dice)
+  - [Initialize Method](#initialize-method)
+  - [Challenge: Dice](challenges/dice/dice-challenge.md)
 </details>
 
 # Getting Started
@@ -415,5 +416,34 @@ end
 ```
 
 When defining classes it is important to think about the access control of its methods as it is best practice to only allow access to methods when necessary.
+
+## Initialize Method
+
+The `initialize` method can be used to instantiate objects with default or customizations. It is called automatically whenever a new instance of a class is created. For example, is `Animal.new` is called, `initialize` will be called with it. 
+
+```ruby
+# classes/initialize_method.rb
+class Animal
+  attr_accessor :noise
+
+  def initialize
+    @noise = 'Ooof!'
+    puts "New animal instantiated."
+  end
+end
+```
+
+It is useful to set attributes to a default or specific state. this is done by passing arguments to the `new` method which get passed on to the `initialize` method. Typically, this is done using an `options` hash.
+
+```ruby
+# classes/initialize_method.rb
+def initialize(options={})
+  @noise = options[:noise] || 'Ooof!'
+end
+#...
+
+pig = Animal.new({noise: "Oink!"})
+puts pig.noise
+```
 
 > There's a challenge available for this chapter: [Dice](challenges/dice/dice-challenge.md)
