@@ -15,6 +15,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Instances](#instances)
   - [Attributes](#attributes)
   - [Method Access Control](#method-access-control)
+  - [Challenge: Dice](challenges/dice)
 </details>
 
 # Getting Started
@@ -414,3 +415,5 @@ end
 ```
 
 When defining classes it is important to think about the access control of its methods as it is best practice to only allow access to methods when necessary.
+
+> There's a challenge available for this chapter: [Dice](challenges/dice/dice-challenge.md)
