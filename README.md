@@ -14,6 +14,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Define a class](#define-a-class)
   - [Instances](#instances)
   - [Attributes](#attributes)
+  - [Method Access Control](#method-access-control)
 </details>
 
 # Getting Started
@@ -336,3 +337,80 @@ Using `self` boils down to a few points:
   - Helps Ruby understand that it is calling a method.
 - Omit `self` when calling any other method (`first_name`)
 - Including `self` is always going to be the safest choice.
+
+## Method Access Control
+
+Methods are the primary interfaces to a class, they can be used to set values and execute other actions. These interfaces should only be exposed when necessary, not all methods will require to run outside its class definition.
+
+This is where access control comes in, restricts access to methods from outside an instance. It defines which methods are callable and which ones aren't.
+
+There are three level of method access control:
+
+|    Access control level |    Description    |
+| ------------- |:-------------:|
+| **public**     | Anyone can access the method (default) |
+| **protected**      | Can only be called by instances of the class and its subclasses |
+| **private**   | Can only be called by instances of a class |
+
+> The focus of this section will be on `public` and `private` access for not as `protected` is better covered when class inheritance in introduced.
+
+One method can be made `private` by adding the keyword above them to a class. It only needs to be added once and will make any methods below restricted to run inside the class only:
+
+```ruby
+# classes/method_access_control.rb
+class Person
+  attr_accessor :first_name, :last_name
+  
+  def full_name
+    "#{first_name} #{last_name}"
+  end  
+
+  def initial_and_last_name
+    "#{get_initial(first_name)} #{last_name}"
+  end  
+
+  private
+    def get_initial(name)
+      name.chars.first + '.'
+    end
+end
+
+ree = Person.new
+ree.first_name = "Rhianon"
+ree.last_name = "Farrow"
+puts ree.full_name
+puts ree.initial_and_last_name
+```
+
+The `initial_and_last_name` can be called from an instance outside its class definition and it makes use of a method that is private to format its return value.
+
+Additionally, the `public` keyword was not used since it can be omitted, any methods above the `private` keyword will be public.
+
+There could also be `protected` methods by adding the keyword to the class.
+
+```ruby
+# classes/method_access_control.rb
+class Person
+  attr_accessor :first_name, :last_name
+  
+  def full_name
+    "#{first_name} #{last_name}"
+  end  
+
+  def initial_and_last_name
+    "#{get_initial(first_name)} #{last_name}"
+  end
+
+  protected
+    def another_method
+      "A protected method"
+    end
+
+  private
+    def get_initial(name)
+      name.chars.first + '.'
+    end
+end
+```
+
+When defining classes it is important to think about the access control of its methods as it is best practice to only allow access to methods when necessary.
