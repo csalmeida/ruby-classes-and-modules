@@ -4,7 +4,7 @@ class Dice
 
   def initialize
     # Dice will have a value uppon instantiation.
-    self.roll
+    roll
   end
 
   # Updates Dice value on each roll.
