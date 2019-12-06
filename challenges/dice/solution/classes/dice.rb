@@ -9,6 +9,12 @@ class Dice
 
   # Updates Dice value on each roll.
   def roll
-    @value = rand(1..6)
+    @value = get_random_number
   end
+
+  # Returns a random number.
+  private
+    def get_random_number
+      rand(1..6)
+    end
 end
