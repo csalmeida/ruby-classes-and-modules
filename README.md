@@ -16,6 +16,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Attributes](#attributes)
   - [Method Access Control](#method-access-control)
   - [Initialize Method](#initialize-method)
+  - [Challenge: Dice](challenges/dice/dice-challenge.md)
 </details>
 
 # Getting Started
@@ -444,3 +445,5 @@ end
 pig = Animal.new({noise: "Oink!"})
 puts pig.noise
 ```
+
+> There's a challenge available for this chapter: [Dice](challenges/dice/dice-challenge.md)
