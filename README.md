@@ -17,6 +17,9 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Method Access Control](#method-access-control)
   - [Initialize Method](#initialize-method)
   - [Challenge: Dice](challenges/dice/dice-challenge.md)
+- [Class Attributes and Methods](#class-attributes-and-methods)
+  - [Class Methods](#class-methods)
+- [Further Resources](#further-resources)
 </details>
 
 # Getting Started
@@ -447,3 +450,88 @@ puts pig.noise
 ```
 
 > There's a challenge available for this chapter: [Dice](challenges/dice/dice-challenge.md)
+
+# Class Attributes and Methods
+
+This sections will introduce class attributes and methods. These are different to intance attributes and methods since they can run with a class without it being instantiated.
+
+## Class Methods
+
+Class methods are used to define behaviors related to a class generally and not a specific instance. These methods are called directly on the class, not an instance.
+
+An example is the `new` method. When `Animal.new` is called there is not instance yet. The `new` method is a class method that is being called directly on the `Animal` class.
+
+Perhaps a more practical example would be `Bicycle.all_brands`. Calling this method would likes all brands a bicycle can have. However, an instance only has one. The `all_brands` methods does not apply to a specific bicycle but returns information of what brand one might have.
+
+To define a *class method*, `self` is added to the method name. The name of the class would also work but most Rubyists would prefer `self`.
+
+```ruby
+# class-attributes-and-methods/class_methods.rb
+class Animal
+  def self.list_classes
+    [
+      'mammalia', 
+      'actinopterygii', 
+      'chondrichthyes', 
+      'aves', 
+      'amphibia', 
+      'anthropods', 
+      'reptilia'
+    ]
+  end
+end
+
+puts Animal.list_classes
+```
+
+The class method returns array of [classes an animal can belong to](https://en.wikipedia.org/wiki/List_of_animal_classes), and can be called on the `Animal` class itself without the using an instance.
+
+A common pattern is to use class methods to create instances of class with custom values. This is called the factory pattern:
+
+```ruby
+# It is a common pattern to use class methods to create instances of a class with custom values. Also known as factory pattern.
+class Product
+  # read/write instance methods and attributes.
+  attr_accessor :name, :price
+
+  # Initialize is an instance method and is bound to an instance.
+  def initialize(price=0.0)
+    @price = price
+  end
+
+  # A class method creates an instance of a product with raised prices.
+  def self.exclusive
+    Product.new(45.0)
+  end
+
+  # Other class methods create instances with different prices.
+  def self.standard
+    Product.new(30.0)
+  end
+
+  def self.discounted
+    Product.new(15.0)
+  end
+end
+
+puts "Deals of the day: "
+exclusive_product = Product.exclusive
+discounted_product = Product.discounted
+puts "Exclusive: #{exclusive_product.price}"
+puts "Discounted: #{discounted_product.price}"
+```
+
+The example above uses class methods to create instances of different types of products whilst using instance attributes for the name and price as these can be different for each instance.
+
+#### Ruby documentation convention on class and instance methods
+In Ruby documentation there is a convention for referencing both class and instance methods that aid in knowing which one is being used. Typically, when using a class method, dot notation is used (`Array.new`) and when using an instance method a hash sign is used instead (`Array#size`):
+
+- Class method: `Array.new`
+- Instance method: `Array#size`
+
+This only applies to documentation and dot notation should be used on both bases when writing Ruby scripts.
+
+# Further Resources
+- [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
+- [Ruby Monstas: Ruby for beginners](http://ruby-for-beginners.rubymonstas.org/index.html)
+- [Ruby on Rails](https://rubyonrails.org/)
