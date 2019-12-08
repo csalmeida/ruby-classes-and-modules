@@ -13,6 +13,19 @@ person.last_name = "Solo"
 # Method makes use of private method in the class.
 puts person.initial_and_last_name
 
+puts '-'*15
+
 # Creating an animal class making use of its @noise attribute.
 pig = Animal.new({noise: "Oink!"})
 puts pig.noise
+
+puts '-'*15
+
+Animal.types.each do |type|
+  puts type
+end
+
+puts '-'*15
+
+wilbur = Animal.create_a_pig
+puts wilbur.noise
