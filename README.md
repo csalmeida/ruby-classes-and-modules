@@ -20,6 +20,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
 - [Class Attributes and Methods](#class-attributes-and-methods)
   - [Class Methods](#class-methods)
   - [Class Attributes](#class-attributes)
+  - [Class read/write methods](#class-read/write-methods)
 - [Further Resources](#further-resources)
 </details>
 
@@ -184,7 +185,7 @@ puts pig.make_noise
 
 When an instance of `Animal` is created, the value of `@noise` persists in the instance. It can be accessed in both methods and this is [an important difference from local variables in terms of scope](https://github.com/csalmeida/ruby-fundamentals#variable-scope). **An instance of a class always has access to its instance variables.** From anywhere inside its class definition it can pull values from instance variables.
 
-### Reader/Writer Methods
+### Read/Write Methods
 
 In some cases instance variables might require to be accessed outside an instance. It was already established this is not possible but since methods are accessible outside an instance, these can be used to get access to an instance variable.
 
@@ -577,6 +578,38 @@ sheep = Animal.new
 Animal.count # 4
 Animal.current_animals # [#<Animal:0x00007fd0292a83d8>,#<Animal:0x00007fd0292a8388>, #<Animal:0x00007fd0292a8360>, #<Animal:0x00007fd0292a8338>]
 ```
+
+## Class read/write methods
+
+Class read/write methods are similar to [instance read/write methods](#read/write-methods). However, there are not equivalent to `attr_*` methods except on the [Ruby on Rails](https://rubyonrails.org/) framework as the `cattr_*` but not on Ruby yet. This could be because they're not used that often.
+
+Read/write methods are defined almost the same way as instance read/write methods with the different of class ones using the `self` keyword:
+
+```ruby
+# class-attributes-and-methods/class_read_write_methods.rb
+class Animal
+  @@species = ['cat', 'cow', 'dog', 'duck', 'horse', 'pig']
+
+  def self.species
+    @@species
+  end
+
+  def self.species=(array)
+    return unless array.is_a(Array)
+    @@species = array
+  end
+end
+```
+
+In the example above there is a method to access `Animal.species` and another to set it, using the same syntactic sugar mentioned when defining these methods for instance variables:
+
+```ruby
+# class-attributes-and-methods/class_read_write_methods.rb
+Animal.species # ['cat', 'cow', 'dog', 'duck', 'horse', 'pig']
+Animal.species = ['elephant', 'crocodile']
+```
+
+The `species` class attribute can read and reset with other values when read/write methods are in place.
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
