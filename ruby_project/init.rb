@@ -29,3 +29,10 @@ puts '-'*15
 
 wilbur = Animal.create_a_pig
 puts wilbur.noise
+
+puts '-'*15
+
+puts Animal.total_animals
+puts Animal.current_animals
+
+puts '-'*15

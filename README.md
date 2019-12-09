@@ -19,6 +19,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Challenge: Dice](challenges/dice/dice-challenge.md)
 - [Class Attributes and Methods](#class-attributes-and-methods)
   - [Class Methods](#class-methods)
+  - [Class Attributes](#class-attributes)
 - [Further Resources](#further-resources)
 </details>
 
@@ -453,7 +454,7 @@ puts pig.noise
 
 # Class Attributes and Methods
 
-This sections will introduce class attributes and methods. These are different to intance attributes and methods since they can run with a class without it being instantiated.
+This sections will introduce class attributes and methods. These are different to instance attributes and methods since they can run with a class without it being instantiated.
 
 ## Class Methods
 
@@ -463,7 +464,7 @@ An example is the `new` method. When `Animal.new` is called there is not instanc
 
 Perhaps a more practical example would be `Bicycle.all_brands`. Calling this method would likes all brands a bicycle can have. However, an instance only has one. The `all_brands` methods does not apply to a specific bicycle but returns information of what brand one might have.
 
-To define a *class method*, `self` is added to the method name. The name of the class would also work but most Rubyists would prefer `self`.
+To define a *class method*, `self` is added to the method name. The name of the class would also work but most *Rubyists* would prefer `self`.
 
 ```ruby
 # class-attributes-and-methods/class_methods.rb
@@ -489,22 +490,18 @@ The class method returns array of [classes an animal can belong to](https://en.w
 A common pattern is to use class methods to create instances of class with custom values. This is called the factory pattern:
 
 ```ruby
-# It is a common pattern to use class methods to create instances of a class with custom values. Also known as factory pattern.
+# class-attributes-and-methods/class_methods.rb
 class Product
-  # read/write instance methods and attributes.
   attr_accessor :name, :price
 
-  # Initialize is an instance method and is bound to an instance.
   def initialize(price=0.0)
     @price = price
   end
 
-  # A class method creates an instance of a product with raised prices.
   def self.exclusive
     Product.new(45.0)
   end
 
-  # Other class methods create instances with different prices.
   def self.standard
     Product.new(30.0)
   end
@@ -530,6 +527,56 @@ In Ruby documentation there is a convention for referencing both class and insta
 - Instance method: `Array#size`
 
 This only applies to documentation and dot notation should be used on both bases when writing Ruby scripts.
+
+## Class Attributes
+
+Similar to class methods, class attributes relate to a class generally and not to any specific instance. This is what makes them different from instance attributes.
+
+These are stored in a class and become shared values among all instances of the class and any instance can access it. Class attributes are used less frequently than class methods.
+
+The first aspect to understand is how to define a `class` variable. Class variables will be defined with `@@` (double at sign) prefixing its name, see [variable scope indicators](https://github.com/csalmeida/ruby-fundamentals#variable-scope-indicators) for more whole table of variable declarations.
+
+```ruby
+# class-attributes-and-methods/class_attributes.rb
+class Animal
+  @@species = ['cat', 'cow', 'dog', 'duck', 'horse', 'pig']
+
+  def self.species
+    @@species
+  end
+end
+
+Animal.species # 
+```
+
+A class attributes is defined and a class method is used to return its value. Class attributes can also be used to track how many instances of a class were created:
+
+```ruby
+# class-attributes-and-methods/class_attributes.rb
+class Animal
+  @@current_animals = []
+
+  def initialize
+    @@current_animals << self
+  end
+
+  def self.current_animals
+    @@current_animals
+  end
+
+  def self.count
+    @@current_animals.count
+  end
+end
+
+cat = Animal.new
+dog = Animal.new
+chicken = Animal.new
+sheep = Animal.new
+
+Animal.count # 4
+Animal.current_animals # [#<Animal:0x00007fd0292a83d8>,#<Animal:0x00007fd0292a8388>, #<Animal:0x00007fd0292a8360>, #<Animal:0x00007fd0292a8338>]
+```
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
