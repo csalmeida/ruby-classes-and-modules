@@ -14,9 +14,7 @@ class Radio
   def initialize(options={})
     @volume = options[:volume] || rand(1..10)
     @band = options[:band] || @@bands[rand(0..1)]
-    # TODO: Set frequency based on band.
-    self.freq = options[:freq] || rand(get_band_range)
-    puts get_band_range
+    @freq = options[:freq] || rand(get_band_range).truncate(2)
   end
 
   # Volume is set using a custom attribute method as only a range of values is accepted.
@@ -26,15 +24,26 @@ class Radio
   end
 
   def freq=(value)
-    return if get_band_range.cover?(value)
+    puts "Is #{value} within band range? #{get_band_range.cover?(value)}"
+    return if !get_band_range.cover?(value)
     @freq = value
   end
 
-  def self.bands_range
-    rand(@@bands_range[:FM])
+  def self.fm
+    Radio.new({band: "FM"})
   end
 
-  #private
+  def self.am
+    Radio.new({band: "AM"})
+  end
+
+  def self.bands_range
+    @@bands_range
+  end
+
+  private
+
+    # Returns band range based on radio band.
     def get_band_range
       case @band
       when 'FM'
