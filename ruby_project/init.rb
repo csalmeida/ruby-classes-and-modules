@@ -36,3 +36,8 @@ puts Animal.total_animals
 puts Animal.current_animals
 
 puts '-'*15
+
+Animal.species = ['elephant', 'crocodile']
+puts "New species array: #{Animal.species.join(", ")}"
+
+puts '-'*15

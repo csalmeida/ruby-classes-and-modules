@@ -25,6 +25,11 @@ class Animal
     @@types
   end
 
+  def self.types=(array)
+    return unless array.is_a?(Array)
+    @@types = array
+  end
+
   def self.current_animals
     @@current_animals
   end
