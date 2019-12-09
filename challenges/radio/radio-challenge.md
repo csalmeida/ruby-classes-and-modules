@@ -15,9 +15,9 @@ Volume should not go above 10 or less than 1.
 
 To recap include these in the class:
 
-- Radio#volume
-- Radio#volume=
-- Radio#status
+- `Radio#volume`
+- `Radio#volume=`
+- `Radio#status`
 
 ## Part 2
 
