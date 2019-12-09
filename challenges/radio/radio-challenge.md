@@ -29,7 +29,7 @@ When using an FM radio the range would be anywhere from `88.0` to `108.0`.
 
 When using an AM radio, the range would be `540.0` to `1600.0`. The frequency range will be dealt in [`Floats`](https://github.com/csalmeida/ruby-fundamentals#notes-on-floats).
 
-This will require that a `band` and that the `Radio` is set to one of those when initialized. This value can be read but not changed from outside the class.
+This will require a `band` value and that the `Radio` is set to one of those when initialized. This value can be read but not changed from outside the class.
 
 A band specific radio can be created using `Radio.am` or `Radio.fm` respectively.
 
