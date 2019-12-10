@@ -7,8 +7,7 @@ class Radio
   }
 
   # Instance attributes.
-  attr_accessor :freq
-  attr_reader :volume, :band
+  attr_reader :volume, :freq, :band
 
   # Sets defaults for each radio instance.
   def initialize(options={})
