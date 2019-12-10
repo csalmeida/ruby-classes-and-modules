@@ -23,22 +23,25 @@ class Radio
     @volume = value
   end
 
+  # Updates frequency only if within band range.
   def freq=(value)
-    puts "Is #{value} within band range? #{get_band_range.cover?(value)}"
     return if !get_band_range.cover?(value)
     @freq = value
   end
 
+  # Returns radio state as a string.
+  def status
+    measure_unit = @band == "FM" ? "MHz" : "kHz" 
+    "Station: #{@freq}#{measure_unit} #{@band}, volume #{@volume}"
+  end
+
+  # Instantiates an FM or AM radio.
   def self.fm
     Radio.new({band: "FM"})
   end
 
   def self.am
     Radio.new({band: "AM"})
-  end
-
-  def self.bands_range
-    @@bands_range
   end
 
   private
