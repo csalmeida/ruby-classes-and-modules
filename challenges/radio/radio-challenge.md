@@ -50,3 +50,14 @@ Test the following:
 1. `fm.freq = 88.5` should set the frequency to that value.
 1. `fm.band` should return the band of this radio.
 1. `fm.band = "none"` should not work as `band` is read only.
+1. The same steps should work for an `Radio.am` radio.
+
+## Extra tasks
+
+The program can optionally be extended:
+
+- Allow changing the radio band, the `Radio` class is currently designed to instantiate one or the other so it will require a few changes.
+- A `switch_band` method might be helpful to handle logic when changing bands can keeping the frequency range correct.
+- When switching bands the last frequency used could be remembered when switching over, instead of defaults.
+- Create a separate `Tuner` class and add all frequency related logic to it. then a `Radio` would instantiate its `Tuner` to handle changing stations.
+- For example `radio.tuner.freq` and `radio.tuner.freq = 101.1`.
