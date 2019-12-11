@@ -1,4 +1,4 @@
-Dice Challenge
+# Challenge: Dice 🎲
 
 In this challenge the goal is to model a set of dice. Create a `DiceSet` class, each will contain two `Dice` instances (create a class for it too).
 

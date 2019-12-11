@@ -21,6 +21,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Class Methods](#class-methods)
   - [Class Attributes](#class-attributes)
   - [Class read/write methods](#class-read/write-methods)
+  - [Challenge: Radio](challenges/radio/radio-challenge.md)
 - [Further Resources](#further-resources)
 </details>
 
@@ -610,6 +611,8 @@ Animal.species = ['elephant', 'crocodile']
 ```
 
 The `species` class attribute can read and reset with other values when read/write methods are in place.
+
+> There's a challenge available for this chapter: [Radio](challenges/radio/radio-challenge.md)
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
