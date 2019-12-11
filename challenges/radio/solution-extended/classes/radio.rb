@@ -6,7 +6,7 @@ class Radio
   def initialize(options={})
     @volume = options[:volume] || rand(1..10)
     @tuner = options[:tuner] || Tuner.new
-    @band = options[:band] || @tuner.band
+    @band = @tuner.band
   end
 
   # Volume is set using a custom attribute method as only a range of values is accepted.
@@ -21,12 +21,16 @@ class Radio
     "Station: #{@tuner.freq}#{measure_unit} #{@band}, volume #{@volume}"
   end
 
-  # Instantiates an FM or AM radio.
-  # def self.fm
-  #   Radio.new({band: "FM"})
-  # end
+  # Instantiates an FM or AM tuner.
+  def self.fm
+    Radio.new({
+      tuner: Tuner.new({band: "FM"})
+    })
+  end
 
-  # def self.am
-  #   Radio.new({band: "AM"})
-  # end
+  def self.am
+    Radio.new({
+      tuner: Tuner.new({band: "AM"})
+    })
+  end
 end
