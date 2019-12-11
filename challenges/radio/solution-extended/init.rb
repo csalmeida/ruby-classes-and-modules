@@ -44,24 +44,3 @@ am.tuner.freq = 541.13
 puts am.status
 
 puts "---------------------------------"
-
-# puts "Creating a tuner..."
-# tuner = Tuner.new
-# puts "Station: #{tuner.freq} #{tuner.band}"
-# # tuner.freq = 92.2
-# puts "Frequency change: #{tuner.freq} #{tuner.band}"
-
-# tuner.switch_band
-# # tuner.freq = 555.2
-# puts "Switching band to #{tuner.band}"
-# puts "Frequency change: #{tuner.freq} #{tuner.band}"
-
-# tuner.switch_band
-# # tuner.freq = 555.2
-# puts "Switching band a second time to #{tuner.band}"
-# puts "Frequency change: #{tuner.freq} #{tuner.band}"
-
-# tuner.switch_band
-# # tuner.freq = 555.2
-# puts "Switching band a third time to #{tuner.band}"
-# puts "Frequency change: #{tuner.freq} #{tuner.band}"
