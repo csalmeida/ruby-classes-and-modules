@@ -24,6 +24,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Challenge: Radio](challenges/radio/radio-challenge.md)
 - [Inheritance](#inheritance)
   - [Class Inheritance](#class-inheritance)
+  - [Override and Extend ](#override-and-extend)
 - [Further Resources](#further-resources)
 </details>
 
@@ -650,6 +651,46 @@ end
 In the example above the `Pig` and `Cow` classes inherit `@noise` from `Animal`. A parent class must be defined before a subclass can inherit from it, so any superclass files need to be required before any subclasses are used.
 
 Inheritance can be useful to organize code and make it easier to stick to DRY (Don't Repeat Yourself) principles.
+
+## Override and Extend 
+
+In short, subclasses override and extend behaviors of its parent class.
+
+When creating a `subclass` with inheritance, the same behaviors and attributes of its parent (`superclass`) are passed down. Overriding and extending a `subclass`'s behaviors is useful in order to create more complex functionality. Otherwise, if just inheritance was used a new class would be created from its parent but everything aside from a few values would differ between the two, it would act exactly like the parent.
+
+```ruby
+# inheritance/override_extend.rb
+class Sofa
+  @@can_open = false
+  attr_accessor :width, :length
+
+  def area
+    width * length
+  end
+end
+
+class SofaBed < Sofa
+  @@can_open = true
+  attr_accessor :length_opened
+  attr_reader  :is_open
+
+  def area
+    @is_open ? width * @length_opened : width * length
+  end
+  
+  def open
+    @is_open = true
+  end
+
+  def close
+    @is_open = false
+  end
+end
+```
+
+In the example above, the `SofaBed` class is extended to have two additional attributes. The `SofaBed#area` method is overridden to make use of these extra attributes.
+
+It also has two additional methods to open or close the sofa. These do not exist in the `Sofa` class and can only be used when a `SofaBed` is instantiated.
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)

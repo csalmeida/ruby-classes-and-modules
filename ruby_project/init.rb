@@ -30,23 +30,26 @@ end
 
 puts '-'*15
 
-wilbur = Pig.new
-puts wilbur.noise
-
-maisie = Cow.new
-puts maisie.noise
-
-daffy = Duck.new
-puts daffy.noise
-
-puts '-'*15
-
 puts Animal.total_animals
 puts Animal.current_animals
 
 puts '-'*15
 
-Animal.species = ['elephant', 'crocodile']
-puts "New species array: #{Animal.species.join(", ")}"
+Animal.types = ['elephant', 'crocodile']
+puts "New species array: #{Animal.types.join(", ")}"
+
+puts '-'*15
+
+wilbur = Pig.new
+puts wilbur.noise
+wilbur.eat
+
+maisie = Cow.new
+puts maisie.noise
+maisie.jump
+
+daffy = Duck.new
+puts daffy.noise
+daffy.fly
 
 puts '-'*15
