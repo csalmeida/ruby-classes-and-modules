@@ -24,7 +24,8 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Challenge: Radio](challenges/radio/radio-challenge.md)
 - [Inheritance](#inheritance)
   - [Class Inheritance](#class-inheritance)
-  - [Override and Extend ](#override-and-extend)
+  - [Override and Extend](#override-and-extend)
+  - [Access the superclass](#access-the-superclass)
 - [Further Resources](#further-resources)
 </details>
 
@@ -691,6 +692,60 @@ end
 In the example above, the `SofaBed` class is extended to have two additional attributes. The `SofaBed#area` method is overridden to make use of these extra attributes.
 
 It also has two additional methods to open or close the sofa. These do not exist in the `Sofa` class and can only be used when a `SofaBed` is instantiated.
+
+## Access the superclass
+
+This section will describe a technique to access the `superclass` (parent class) from a `subclass` (child class). After overriding methods, the parent methods can still be accessed.
+
+There are two main reasons why this might be useful. One is to perform additional code before and/or after a parent method is executed, adding some extra steps in the beginning or cleanup in the end.
+
+```ruby
+class Chef
+  def make_dinner
+    puts "Cook food."
+  end
+end
+
+class AmateurChef < Chef
+  def make_dinner
+    puts "Read recipe"
+    super
+    puts "Clean up mess."
+  end
+end
+```
+
+In the example above, the `Chef` class is able to `make_food` in one step. `AmateurChef` however, has to read the recipe and clean up the mess afterwards. The `AmateurChef#make_dinner` is overridden to add these extra steps but `Chef#make_dinner` is called in between them using the `super` keyword.
+
+When `super` is called, it will run `Chef#make_dinner`, and if this method changes, the `AmateurChef` class will inherit this behavior as well.
+
+The second reason to use this technique is as a fallback to the parent method if a condition is not met.
+
+```ruby
+class Image
+  attr_accessor :resizable
+
+  def geometry
+    "800x600"
+  end
+end
+
+class ProfileImage < Image
+  def initialize
+    @resizable = true
+  end
+
+  def geometry
+    @resizable ? "100x100" : super
+  end
+end
+```
+
+In this second example `Image` returns a geometry. `ProfileImage` is defined as a subclass of `Image` and overrides the `ProfileImage#geometry` method to let `Image#geometry` take over when the image is not `@resizable`, using `super`.
+
+### Further notes on superclass access
+
+Additionally, `super` can be assigned to a variable, for example `x = super`. If the parent class method takes arguments, these can also be passed to `super` as it is a method and works the same way.
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
