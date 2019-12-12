@@ -22,6 +22,8 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Class Attributes](#class-attributes)
   - [Class read/write methods](#class-read/write-methods)
   - [Challenge: Radio](challenges/radio/radio-challenge.md)
+- [Inheritance](#inheritance)
+  - [Class Inheritance](#class-inheritance)
 - [Further Resources](#further-resources)
 </details>
 
@@ -613,6 +615,41 @@ Animal.species = ['elephant', 'crocodile']
 The `species` class attribute can read and reset with other values when read/write methods are in place.
 
 > There's a challenge available for this chapter: [Radio](challenges/radio/radio-challenge.md)
+
+# Inheritance
+
+The concept of inheritance is a fundamental part of object-oriented programming (OOP). Classes can inherit methods and attributes from others, further extending their functionality.
+
+## Class Inheritance
+
+It is the bestowal of behaviors from another class. A class can be extended by another to make use of its methods and attributes.
+
+In previous sections an `Animal` class was defined and different animals would be instantiated from it. This approach is completely valid, however, inheritance could also be applied to create classes that inherit `Animal` behavior. For example a `Cow`, `Lion` or `Snake` class could all inherit from `Animal`.
+
+This means that `Animal` would become a `superclass` or parent class whilst any others that inherit from it would become `subclass`es or children classes.
+
+```ruby
+# inheritance/class_inheritance.rb
+class Animal
+  attr_accessor :noise
+end
+
+class Pig < Animal
+  def initialize
+    @noise = "Oink!"
+  end
+end
+
+class Cow < Animal
+  def initialize
+    @noise = "Moo!"
+  end
+end
+```
+
+In the example above the `Pig` and `Cow` classes inherit `@noise` from `Animal`. A parent class must be defined before a subclass can inherit from it, so any superclass files need to be required before any subclasses are used.
+
+Inheritance can be useful to organize code and make it easier to stick to DRY (Don't Repeat Yourself) principles.
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
