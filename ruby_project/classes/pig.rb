@@ -5,4 +5,8 @@ class Pig < Animal
     @noise = 'Oink!'
     @color = 'pink'
   end
+
+  def eat
+    puts "Nom nom nom"
+  end
 end

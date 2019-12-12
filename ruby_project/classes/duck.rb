@@ -5,4 +5,8 @@ class Duck < Animal
     @noise = 'Quack!'
     @color = 'white'
   end
+
+  def fly
+    puts "Flying free as a bird"
+  end
 end
