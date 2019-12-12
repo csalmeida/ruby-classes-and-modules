@@ -3,6 +3,9 @@
 # Imports the person class and others, the .rb extension is optional.
 require_relative 'classes/person'
 require_relative 'classes/animal'
+require_relative 'classes/pig'
+require_relative 'classes/cow'
+require_relative 'classes/duck'
 
 # After importing, an instance of Person can be created:
 person = Person.new
@@ -27,8 +30,14 @@ end
 
 puts '-'*15
 
-wilbur = Animal.create_a_pig
+wilbur = Pig.new
 puts wilbur.noise
+
+maisie = Cow.new
+puts maisie.noise
+
+daffy = Duck.new
+puts daffy.noise
 
 puts '-'*15
 

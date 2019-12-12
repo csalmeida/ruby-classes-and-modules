@@ -37,8 +37,4 @@ class Animal
   def self.total_animals
     @@current_animals.count
   end
-
-  def self.create_a_pig
-    Animal.new({noise: 'Oink', color: 'pink'})
-  end
 end
