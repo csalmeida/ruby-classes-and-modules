@@ -1,12 +1,12 @@
 Challenge: Secure Radio 📻🔒
 
-In challenge the is to create a secure radio, which return an encrypted audio stream.
+This challenge is to create a secure radio, which return an encrypted audio stream.
 
-Make use of the `Radio` class from the previous challenge and add a `Radio#play` to it which returns a fake audio stream as a string value.
+# Part 1
 
-Part 1
+To achieve this, make use of the `Radio` class from the previous challenge and add a `Radio#play` to it which returns a fake audio stream as a string value.
 
-To achieve this, add an `@@audio_samples` class attribute array with examples of streams to `Radio`, here's an example:
+Add an `@@audio_samples` class attribute array with examples of streams to `Radio`, here's an example:
 
 ```ruby
   @@audio_samples = [
@@ -22,7 +22,7 @@ Create a private `Radio#audio_stream` method where a random element of `@@audio_
 
 Edit or create `Radio#play` to return the `Radio#audio_stream`. For, example: `puts "The radio plays: " + audio_stream`.
 
-Part 2
+# Part 2
 
 Use [a shift cipher](https://goto.pachanka.org/crypto/shift-cipher) to encrypt the stream string. A shift cipher replaces each characters with a letter, a fixed number of positions down the alphabet.
 
@@ -34,7 +34,7 @@ With a shift of 3: A => D, B => E, C => F, D => G
 
 Create a `ShiftCipher` class to be used when encrypted the stream.
 
-Add a `ShiftCipher.encode(plain_string, 3)` class method that encrypts the strings. It takes a plain string, in this case, ultimately would the the `SecureRadio#audio_stream`, and how much a character should be shifted by.
+Add a `ShiftCipher.encode(plain_string, 3)` class method that encrypts the strings. It takes a plain string, in this case, it would be the `SecureRadio#audio_stream`, and an `integer` of how much a character should be shifted by.
 
 Create a `ShiftCipher.decode(cipher_string, 3)` method that will revert an encrypted string to its original state. It should take the same number of arguments as `ShiftCipher.encode`.
 
@@ -55,9 +55,8 @@ Technically, the secure radio would only broadcast encrypted streams and would b
   - A good start might be starting by shifting lowercase strings with `String#downcase` before trying to work out how to encrypt mixed cased strings.
   - The modulo operator might be useful to keep the shift from happening with a letter at the end of the alphabet. `28 % 26 returns 2`
 </details>
-<br>
 
-Part 3
+# Part 3
 
 Create a `SecureRadio` subclass which inherits from `Radio` and makes use of `ShiftCipher` to encrypt the audio stream.
 
