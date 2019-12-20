@@ -6,7 +6,8 @@ class Radio
     AM: 540.0..1600.0
   }
   @@audio_samples = [
-    "Samba em Prelúdio",
+    "Samba em Preludio",
+    "Desafinado",
     "Like a Rolling Stone",
     "Cantaloupe Island",
     "a traffic report",
