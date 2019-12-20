@@ -37,7 +37,7 @@ class Radio
 
   # Plays the radio.
   def play
-    "The radio plays: #{audio_stream}"
+    puts "The radio plays: #{audio_stream}"
   end
 
   # Returns radio state as a string.
@@ -55,12 +55,14 @@ class Radio
     Radio.new({band: "AM"})
   end
 
-  private
-
+  protected
+  
     # Sets stream to be played
     def audio_stream
       @@audio_samples.sample
     end
+
+  private
 
     # Returns band range based on radio band.
     def get_band_range
