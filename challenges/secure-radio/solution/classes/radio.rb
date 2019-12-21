@@ -6,11 +6,11 @@ class Radio
     AM: 540.0..1600.0
   }
   @@audio_samples = [
-    "Samba em Preludio",
-    "Desafinado",
+    "Samba em Prelúdio",
     "Like a Rolling Stone",
     "Cantaloupe Island",
-    "a traffic report",
+    "Desafinado",
+    "a traffic report...",
     "a news report"
   ]
 
