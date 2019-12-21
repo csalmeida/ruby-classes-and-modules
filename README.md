@@ -26,6 +26,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Class Inheritance](#class-inheritance)
   - [Override and Extend](#override-and-extend)
   - [Access the superclass](#access-the-superclass)
+  - [Challenge: Secure Radio](challenges/secure-radio/secure-radio-challenge.md)
 - [Further Resources](#further-resources)
 </details>
 
@@ -746,6 +747,8 @@ In this second example `Image` returns a geometry. `ProfileImage` is defined as 
 ### Further notes on superclass access
 
 Additionally, `super` can be assigned to a variable, for example `x = super`. If the parent class method takes arguments, these can also be passed to `super` as it is a method and works the same way.
+
+> There's a challenge available for this chapter: [Secure Radio](challenges/secure-radio/secure-radio-challenge.md)
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
