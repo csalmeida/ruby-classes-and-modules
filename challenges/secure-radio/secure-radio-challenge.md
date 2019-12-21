@@ -1,4 +1,4 @@
-Challenge: Secure Radio 📻🔒
+# Challenge: Secure Radio 📻🔒
 
 This challenge is to create a secure radio, which return an encrypted audio stream.
 
@@ -41,7 +41,6 @@ Create a `ShiftCipher.decode(cipher_string, 3)` method that will revert an encry
 Technically, the secure radio would only broadcast encrypted streams and would be up to the listener to decode it, however it is a good exercise to write both of them.
 
 ### Hints
-
 
 <details>
 <summary>Click to expand contents</summary>
