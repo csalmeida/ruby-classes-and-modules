@@ -27,6 +27,8 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Override and Extend](#override-and-extend)
   - [Access the superclass](#access-the-superclass)
   - [Challenge: Secure Radio](challenges/secure-radio/secure-radio-challenge.md)
+- [Dates and Times](#dates-and-times)
+  - [Times](#times)
 - [Further Resources](#further-resources)
 </details>
 
@@ -749,6 +751,100 @@ In this second example `Image` returns a geometry. `ProfileImage` is defined as 
 Additionally, `super` can be assigned to a variable, for example `x = super`. If the parent class method takes arguments, these can also be passed to `super` as it is a method and works the same way.
 
 > There's a challenge available for this chapter: [Secure Radio](challenges/secure-radio/secure-radio-challenge.md)
+
+# Dates and Times
+
+Date and time based classes are useful in Ruby and when writting program in general, section is an introduction to these classes.
+
+## Times
+
+Times are stored as the number of seconds since January 1st, 1970. Otherwise known as [Unix time or seconds since the Epoch](https://en.wikipedia.org/wiki/Unix_time).
+
+All times include fractions of a second which is important for comparisons.
+
+The fastest way to get the current time in Ruby is using `Time.now` class. It will return the current time with the default format. Alternatively, a Unix timestamp can also be retrieved.
+
+```ruby
+# dates-and-times/time.rb
+Time.now # 2019-12-23 12:51:12 +0000
+Time.now.to_i # 1577105472
+Time.at(1577100912) # 2019-12-23 11:35:12 +0000
+```
+
+However, it is more common that more readable date formats are used instead. Using `Time.new` a custom format can be retrieved instead.
+
+```ruby
+Time.new(year, month, day, hour, minute, second, utc_offset)
+```
+
+```ruby
+# dates-and-times/time.rb
+Time.new(2020, 11, 05, 00, 00, 00, "+02:00") # 2020-11-05 00:00:00 +0200
+Time.new(2020, 03, 01) # 2020-03-01 00:00:00 +0000
+```
+
+Addition and subtraction can be applied to find different times:
+
+```ruby
+# dates-and-times/time.rb
+a_day = (60 * 60 * 24)
+yesterday = Time.now - a_day # 2019-12-23 11:05:08 +0000
+tomorrow = Time.now + a_day # 2019-12-25 11:05:08 +0000
+next_week = Time.now + a_day * 7 # 2019-12-31 11:05:08 +0000
+```
+
+Additionally, there are multiple methods that can be called to retrieve a single part of time:
+
+```ruby
+# dates-and-times/time.rb
+current = Time.now
+current.year # 2019
+current.month # 12
+current.day # 24
+current.hour # 12
+current.min # 18
+current.sec # 56
+current.nsec # 516215000
+```
+
+There are methods that can get more specific parts of time such as the day of the year (`Time#yday`), the day of the week (`Time#wday`) and boolean methods that allow to understand if the date is on a certain day of the week (`friday?`):
+
+```ruby
+# dates-and-times/time.rb
+current.yday # 358
+current.wday #  2
+current.monday? # false
+current.friday? # true
+```
+
+Ruby also supports `strftime` (string for time or string-formatted time). This method is common to a lot of programming languages and [a format can be provided with a string](https://apidock.com/ruby/DateTime/strftime), defining how a date should be returned:
+
+```ruby
+# dates.and-times/time.rb
+current.strftime("Printed on %m/%d/%Y") # Printed on 12/24/2019
+current.strftime("at %I:%M%p") # at 12:56PM
+```
+
+Additional methods can be used to work with time zones:
+
+```ruby
+# dates-and-times/time.rb
+current.zone # WET
+current.utc? # false
+```
+
+Consult `ri` or the Ruby documentation for more notes on the `Time` class.
+
+Finally, when comparing time, the following statement will always return `false`:
+
+```ruby
+# dates-and-times/time.rb
+Time.now == Time.now # false
+Time.now.nsec == Time.now.nsec # false
+Time.now.day == Time.now.day # true
+```
+
+This is because Ruby compares time down to the nanosecond so each of these instances will have a differente time when they were instantiated.
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
