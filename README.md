@@ -28,7 +28,8 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Access the superclass](#access-the-superclass)
   - [Challenge: Secure Radio](challenges/secure-radio/secure-radio-challenge.md)
 - [Dates and Times](#dates-and-times)
-  - [Times](#times)
+  - [Time](#time)
+  - [Date](#date)
 - [Further Resources](#further-resources)
 </details>
 
@@ -756,7 +757,7 @@ Additionally, `super` can be assigned to a variable, for example `x = super`. If
 
 Date and time based classes are useful in Ruby and when writting program in general, section is an introduction to these classes.
 
-## Times
+## Time
 
 Times are stored as the number of seconds since January 1st, 1970. Otherwise known as [Unix time or seconds since the Epoch](https://en.wikipedia.org/wiki/Unix_time).
 
@@ -844,7 +845,41 @@ Time.now.nsec == Time.now.nsec # false
 Time.now.day == Time.now.day # true
 ```
 
-This is because Ruby compares time down to the nanosecond so each of these instances will have a differente time when they were instantiated.
+This is because Ruby compares time down to the nanosecond so each of these instances will have a different time when they were instantiated.
+
+## Date
+
+The `Date` class is similar to `Time` and can be useful when working with dates without the need of the time. The `Date` class includes methods that are not available in `Time`.
+
+The `Date` class is part of Ruby's Standard Library. When Ruby is installed, the `Date` class is added as well but it is not loaded. This means `Date` won't be available on `irb` or Ruby scripts until specified.
+
+All _Core_ methods are loaded automatically, whilst _Standard Library_ methods need to be referenced before use. Consult the [Ruby Documentation](https://ruby-doc.org/) for a complete list.
+
+To use `Date` or any Standard Library class, a `require` statement needs to be added to `irb` or the Ruby script.
+
+```ruby
+# dates-and-times/date.rb
+require 'date'
+Date.today
+Date.today.month
+Date.today.to_time
+```
+
+Additional methods are only present in the `Date` class:
+
+```ruby
+# dates-and-times/date.rb
+date = Date.new(1970, 01, 13)
+
+date.leap?
+date.cweek
+date.cwday
+date.cwday
+
+date.next_day
+date.next_month
+date.next_year
+```
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
