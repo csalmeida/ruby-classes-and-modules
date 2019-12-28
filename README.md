@@ -36,6 +36,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Namespacing](#namespacing)
   - [Mixins](#mixins)
   - [Load, Require and Include](#load-require-and-include)
+  - [Challenge: To-do List](challenges/to-do-list/to-do-list-challenge.md)
 - [Further Resources](#further-resources)
 </details>
 
@@ -1089,6 +1090,8 @@ The `Customer` class is imported into the file using `require` a second time. In
 Next the `Addressable` module is added to the script using `require_relative`. This is the same as `require` with the difference that the file path provided can be shortnened relatively to the file requiring it.
 
 Lastly, `Customer` is overwritten and the `Addressable` module is added by using `include`.
+
+> There's a challenge available for this chapter: [To-do List](challenges/to-do-list/to-do-list-challenge.md)
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
