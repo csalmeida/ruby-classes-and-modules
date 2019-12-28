@@ -31,6 +31,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Time](#time)
   - [Date](#date)
   - [DateTime](#datetime)
+  - [Challenge: Birth Date Analysis](challenges/birth-date-analysis/birth-date-analysis-challenge.md)
 - [Further Resources](#further-resources)
 </details>
 
@@ -875,7 +876,7 @@ date = Date.new(1970, 01, 13)
 date.leap?
 date.cweek
 date.cwday
-date.cwday
+date.cwyear
 
 date.next_day
 date.next_month
@@ -904,6 +905,10 @@ If required a `Time` object can be converted to `DateTime` and vice versa:
 DateTime.now.to_time
 Time.now.to_datetime
 ```
+
+The `Time` class tends to be the most useful class when workinf with dates and times. However, `Date` and `DateTime` add further functionality for more complex cases.
+
+> There's a challenge available for this chapter: [Secure Radio](challenges/birth-date-analysis/birth-date-analysis-challenge.md)
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
