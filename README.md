@@ -35,6 +35,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
 - [Modules](#modules)
   - [Namespacing](#namespacing)
   - [Mixins](#mixins)
+  - [Load, Require and Include](#load-require-and-include)
 - [Further Resources](#further-resources)
 </details>
 
@@ -1046,6 +1047,48 @@ In general, class inheritance is used when a class needs to modify or extend the
 Mixins on the other hand are used when several classes need to utilize a single set of behaviors.
 
 There might also be cases where it would make little difference between using one or the other and it is up to developer to make the decision on which one would be best.
+
+## Load, Require and Include
+
+When splitting scripts in multiple files and coding with the DRY (Don't Repeat Yourself) principle in mind, it becomes important to understand different ways of adding them and use them in a script.
+
+There are three ways of adding code from another file or module into scripts, `load`, `require` and `include`.
+
+`load`, loads a source file everytime it is called and it returns a boolean on whether the file was loaded successfully. However, it does 
+
+It is not used very often since `require` is more frequently.
+
+`require` works exactly the same as `load` but it loads a source file only once and keeps track of it for the duration of the script.
+
+It only returns `true` if a file has been loaded successfully and has not been loaded before.
+
+`require` must be either provided a full path to a file, or a Standard Library path which is part of `$LOAD_PATH`.
+
+> `$LOAD_PATH` is an array of paths Ruby makes use when looking to load libraries or classes part of its Standard Library. `require` looks in those paths for them or in a full path when provided.
+
+`include` is only used when including modules in classes and *cannot* be used with files. An important difference when compared with the two other keywords above.
+
+> Other programming languages might change the meaning and functionality of these keywords.
+
+```ruby
+require 'date'
+
+require 'Users/grivia/project/classes/customer'
+
+require_relative 'modules/addressable'
+
+class Customer
+  include Addressable
+end
+```
+
+In the example above, the `Date` class is required from Ruby's Stardard Library and no further path is required.
+
+The `Customer` class is imported into the file using `require` a second time. In this case it is a custom file and therefore the whole path needs to be specified.
+
+Next the `Addressable` module is added to the script using `require_relative`. This is the same as `require` with the difference that the file path provided can be shortnened relatively to the file requiring it.
+
+Lastly, `Customer` is overwritten and the `Addressable` module is added by using `include`.
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
