@@ -30,6 +30,8 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
 - [Dates and Times](#dates-and-times)
   - [Time](#time)
   - [Date](#date)
+  - [DateTime](#datetime)
+  - [Challenge: Birth Date Analysis](challenges/birth-date-analysis/birth-date-analysis-challenge.md)
 - [Further Resources](#further-resources)
 </details>
 
@@ -874,12 +876,39 @@ date = Date.new(1970, 01, 13)
 date.leap?
 date.cweek
 date.cwday
-date.cwday
+date.cwyear
 
 date.next_day
 date.next_month
 date.next_year
 ```
+
+## DateTime
+
+The `DateTime` class is also part of the Ruby Stardard Library and it needs to be included in a script before being used. It is a subclass of `Date` so it does inherit some of its behavior.
+
+To use `DateTime` the `date` library must be required, than similar methods to `Date` and `Time` might be used:
+
+```ruby
+# dates-and-times/datetime.rb
+require 'date'
+DateTime.now
+DateTime.new(2020, 11, 05, 00, 00, 00, "+02:00")
+```
+
+However, why wouldn't `Time` be used instead? `DateTime` know how to distinguish between the Gregorian and Julian calendars, so it is useful when working with historical dates. When working with modern dates, `Time` would be most appropriate in most cases.
+
+If required a `Time` object can be converted to `DateTime` and vice versa:
+
+```ruby
+# dates-and-times/datetime.rb
+DateTime.now.to_time
+Time.now.to_datetime
+```
+
+The `Time` class tends to be the most useful class when working with dates and times. However, `Date` and `DateTime` add further functionality for more complex cases.
+
+> There's a challenge available for this chapter: [Secure Radio](challenges/birth-date-analysis/birth-date-analysis-challenge.md)
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
