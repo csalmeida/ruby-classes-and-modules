@@ -906,7 +906,7 @@ DateTime.now.to_time
 Time.now.to_datetime
 ```
 
-The `Time` class tends to be the most useful class when workinf with dates and times. However, `Date` and `DateTime` add further functionality for more complex cases.
+The `Time` class tends to be the most useful class when working with dates and times. However, `Date` and `DateTime` add further functionality for more complex cases.
 
 > There's a challenge available for this chapter: [Secure Radio](challenges/birth-date-analysis/birth-date-analysis-challenge.md)
 
