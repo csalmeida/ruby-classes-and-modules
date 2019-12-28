@@ -34,6 +34,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Challenge: Birth Date Analysis](challenges/birth-date-analysis/birth-date-analysis-challenge.md)
 - [Modules](#modules)
   - [Namespacing](#namespacing)
+  - [Mixins](#mixins)
 - [Further Resources](#further-resources)
 </details>
 
@@ -960,6 +961,91 @@ date_for_two = MakeSparks::Date.new # A date is booked for 2 at Tulsa's Botanica
 Using namespaces not only prevents conflicts with Ruby classes but also other code part of a project's codebase. As it grows there might be reasons to reuse a class name and differentiate them using namespacing. 
 
 Namespacing is frequently used to namespace classes in open-source plugins.
+
+## Mixins
+
+Ruby only allows subclasses to inherit from a single superclass, meaning a subclass can only have one parent.
+
+Mixing modules allow for shared functionality to be packaged up and then be mixed in one or multiple classes without having to inherit from it.
+
+Considering an arbitrary `Person` class, it could be used as a parent class to other subclasses such as `Customer` or `Supplier`:
+
+```ruby
+# modules/mixins.rb
+class Person
+  attr_accessor :first_name, :last_name
+  attr_accessor :city, :state, :zip
+  attr_accessor :age, :gender
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def city_state_zip
+    "#{city}, #{state} #{zip}"
+  end
+end 
+
+class Customer < Person
+end
+
+class Supplier < Person
+end
+```
+
+Using class inheritance in the example above, both `Customer` and `Supplier` will inherit all `Person` functionality. However, `Customer` and `Supplier` only need some functionality shared between them, `Person#age` and `Person#gender` are not needed in its subclasses.
+
+In this case code can be packaged up in mixins and be included in other classes as needed. For example a `Nameable` and a `ContactInfo` module:
+
+```ruby
+# modules/mixins.rb
+module Nameable
+  attr_accessor :first_name, :last_name
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+end
+
+module Contactinfo
+  attr_accessor :city, :state, :zip
+
+  def city_state_zip
+    "#{city}, #{state} #{zip}"
+  end
+end
+```
+
+In this case, all functionality aside from `Person#age` and `Person#gender` has been split into modules and can now be shared across multiple classes without them inheriting unwanted behavior:
+
+```ruby
+# modules/mixins.rb
+class Person
+  include Nameable
+  include Contactinfo
+  attr_accessor :age, :gender
+end
+
+class Customer
+  include Nameable
+  include Contactinfo
+end 
+
+class Supplier
+  include Nameable
+  include Contactinfo
+end
+```
+
+### Class Inheritance vs. Mixins
+
+It might be difficult to identify when to use class inheritance and mixins as it might seem that both accomplish the same goal.
+
+In general, class inheritance is used when a class needs to modify or extend the behavior of another class. Something similar to its parent class but with slight differences.
+
+Mixins on the other hand are used when several classes need to utilize a single set of behaviors.
+
+There might also be cases where it would make little difference between using one or the other and it is up to developer to make the decision on which one would be best.
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)

@@ -1,5 +1,8 @@
 #!usr/bin/env ruby
 
+# Imports any required modules.
+require_relative 'modules/nameable'
+
 # Imports the person class and others, the .rb extension is optional.
 require_relative 'classes/person'
 require_relative 'classes/animal'
