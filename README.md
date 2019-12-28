@@ -32,6 +32,8 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Date](#date)
   - [DateTime](#datetime)
   - [Challenge: Birth Date Analysis](challenges/birth-date-analysis/birth-date-analysis-challenge.md)
+- [Modules](#modules)
+  - [Namespacing](#namespacing)
 - [Further Resources](#further-resources)
 </details>
 
@@ -909,6 +911,55 @@ Time.now.to_datetime
 The `Time` class tends to be the most useful class when working with dates and times. However, `Date` and `DateTime` add further functionality for more complex cases.
 
 > There's a challenge available for this chapter: [Secure Radio](challenges/birth-date-analysis/birth-date-analysis-challenge.md)
+
+# Modules
+
+Modules are wrappers around Ruby code like Classes. However, unlike classes, modules cannot be instantiated.
+
+Modules are typically used in use for namespacing and in mixins.
+
+## Namespacing
+
+Namespacing is used to prevent conflicts when code has similarly named classes and methods.
+
+For example, in a classroom two people might have the same name, like Sophia.
+
+To differenciate between the two, the surname initially might be added when refering or calling them. In code, namespacing works the same way.
+
+A pratical example could be the definition of a `Date` class for MakeSparks a fictitious online dating site. `Date` exists within Ruby's Standard Library, so the new class should be namespaced to avoid conflicts, by wrapping it in a module:
+
+```ruby
+# modules/namespacing.rb
+module MakeSparks
+  class Date
+
+    def initialize(double_date=false)
+      @double_date = double_date
+    end
+
+    def booking
+      "A date is booked for #{is_double?} at Tulsa's Botanical Garden's Restaurant by 7:30PM."
+    end
+
+    private
+
+      def is_double?
+        @double_date ? 4 : 2
+      end
+  end 
+end
+```
+
+The `MakeSparks` module has its own `Date` class which can be used and instantiated by prefixing it with its namespace:
+
+```ruby
+# modules/namespacing.rb
+date_for_two = MakeSparks::Date.new # A date is booked for 2 at Tulsa's Botanical Garden's Restaurant by 7:30PM.
+```
+
+Using namespaces not only prevents conflicts with Ruby classes but also other code part of a project's codebase. As it grows there might be reasons to reuse a class name and differentiate them using namespacing. 
+
+Namespacing is frequently used to namespace classes in open-source plugins.
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
