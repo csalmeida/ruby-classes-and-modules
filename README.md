@@ -37,6 +37,8 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Mixins](#mixins)
   - [Load, Require and Include](#load-require-and-include)
   - [Challenge: To-do List](challenges/to-do-list/to-do-list-challenge.md)
+- [Exceptions](#exceptions)
+  - [Handle Exceptions](#handle-exceptions)
 - [Further Resources](#further-resources)
 </details>
 
@@ -1092,6 +1094,68 @@ Next the `Addressable` module is added to the script using `require_relative`. T
 Lastly, `Customer` is overwritten and the `Addressable` module is added by using `include`.
 
 > There's a challenge available for this chapter: [To-do List](challenges/to-do-list/to-do-list-challenge.md)
+
+## Exceptions
+
+Exceptions are classes for handling exceptional events. Unexpected behaviour or events, most often (but not always) are errors. Error exceptions can be thrown as, for instance, `SyntaxError`s or `NoMethodError`s.
+
+Errors belong to Ruby's exception class and they could be referred as in _"an exception as been raised"_. Ruby [has many built in exceptions as subclasses of the `Exception` class](https://ruby-doc.org/core-2.7.0/Exception.html).
+
+Most common exceptions thrown in Ruby are usually a `StandardError`.
+
+## Handle Exceptions
+
+A way to throw an exception in Ruby is to divide a number by zero, a `ZeroDivisionError` is thrown:
+
+```ruby
+1 / 0 # ZeroDivisionError
+```
+
+When running this code in `irb`, a list of all the places where it broke is printed to the console. This is useful when programming and debugging code, however, this output is not useful to users and should be ommited.
+
+To do this, additional code can be put in place to handle the exception, allowing the script to fail gracefully.
+
+```ruby
+# exceptions/handle-exceptions.rb
+begin
+  1 / 0
+rescue
+  puts "Exception: Cannot divide number by zero."
+end
+```
+
+The code which could raise an exception is put under the `begin` keyword, and code that handles the exception is put under the `rescue` keyword.
+
+The code is really put between a `begin` and `end` block and aids in letting Ruby know that `rescue` applies to all code in that block.
+
+If anything goes wrong anywhere in that block, Ruby will jump to the `rescue` line and run the code there instead. It could run another method, or it could return another error message instead.
+
+`rescue` can also be used in method definitions, `def` and `end` blocks act as the delimiters of which code `rescue` applied to:
+
+```ruby
+# exceptions/handle-exceptions.rb
+def divide(x,y)
+  x / y
+rescue
+  puts "Exceptions raised, cannot divide #{x} with #{y}."
+end
+```
+
+Furthermore, exceptions do not need to be handled inside the method:
+
+```ruby
+def divide(x,y)
+  x / y
+end
+
+begin
+  divide(1,0)
+rescue
+  puts "Exceptions raised when trying division."
+end
+```
+
+This is because exceptions get returned like any other value in Ruby, and even if it was thrown in a method deep in the code of a script it will keep getting returned until it's handled or it is the end of the script.
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
