@@ -39,6 +39,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Challenge: To-do List](challenges/to-do-list/to-do-list-challenge.md)
 - [Exceptions](#exceptions)
   - [Handle Exceptions](#handle-exceptions)
+  - [Handle Specific Exceptions](#handle-specific-exceptions)
 - [Further Resources](#further-resources)
 </details>
 
@@ -1144,6 +1145,7 @@ end
 Furthermore, exceptions do not need to be handled inside the method:
 
 ```ruby
+# exceptions/handle-exceptions.rb
 def divide(x,y)
   x / y
 end
@@ -1156,6 +1158,77 @@ end
 ```
 
 This is because exceptions get returned like any other value in Ruby, and even if it was thrown in a method deep in the code of a script it will keep getting returned until it's handled or it is the end of the script.
+
+## Handle Specific Exceptions
+
+In the previous section, only the `rescue` keyword was used to handle any exceptions thrown in a code block. However, `rescue` defaults to handling `StandardError` and its subclasses and sometimes it might be useful to specify exacly what kind of exception is to be handled.
+
+This can be achieved by adding the exception name after `rescue`:
+
+```ruby
+# exceptions/handle-specific-exceptions.rb
+def divide(x,y)
+  x / y
+rescue ZeroDivisionError
+  puts "ZeroDivisionError handled"
+rescue TypeError
+  puts "TypeError handled"
+rescue
+  puts "Some other StandardError handled"
+end
+```
+
+Multiple exceptions may be specified, separated by a comma:
+
+```ruby
+# exceptions/handle-specific-exceptions.rb
+def divide(x,y)
+  x / y
+end
+
+begin
+  divide(4,0)
+  divide(4, "2")
+  divide(4)
+rescue ZeroDivisionError
+  puts "Cannot divide by zero"
+rescue TypeError, ArgumentError
+  puts "Requires two integer arguments"
+end
+```
+
+In the example above the exceptions were moved outside of the method, since `ArgumentError` gets thrown even before the code inside `divide` has a chance to run. Depending on the exception being handled, the place where it needs to run may differ. A refactored example could look like:
+
+```ruby
+def divide(x,y)
+  x / y
+rescue ZeroDivisionError
+  puts "ZeroDivisionError handled"
+rescue TypeError
+  puts "TypeError handled"
+end
+
+begin
+  puts divide(4,2)
+  divide(4,0)
+  divide(4,"2")
+  divide(4)
+rescue ArgumentError
+  puts "Requires two integer arguments."
+end
+```
+
+However, one gotcha is that the `Exception` class will also be accepted by `rescue`. This should not be used since it will take over other exceptions Ruby uses internally:
+
+```ruby
+# Don't do this!
+begin
+  1 / 0
+rescue Exception
+  puts "Puts every exception is handled"
+  puts "Even those Ruby uses internally to work"
+end
+```
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)

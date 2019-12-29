@@ -2,20 +2,21 @@
 
 def divide(x,y)
   puts x / y
-rescue
+rescue ZeroDivisionError
   puts "Cannot divide by zero"
+rescue TypeError
+  puts "Requires two integer arguments"
 end
 
+divide(4,2)
 divide(4,0)
-
-def divide(x,y)
-  puts x / y
-end
-
+divide(4,"2")
 
 begin
   divide(4,2)
   divide(7,0)
-rescue
-  puts "Cannot divide by zero"
+  divide(7,"2")
+  divide(7)
+rescue ArgumentError
+  puts "Requires two integer arguments"
 end
