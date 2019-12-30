@@ -43,6 +43,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Exception Methods](#exception-methods)
   - [Raise Exceptions](#raise-exceptions)
   - [Custom Exceptions](#custom-exceptions)
+  - [Challenge: Custom Exceptions](challenges/custom-exceptions/custom-exceptions-challenge.md)
 - [Further Resources](#further-resources)
 </details>
 
@@ -1099,7 +1100,7 @@ Lastly, `Customer` is overwritten and the `Addressable` module is added by using
 
 > There's a challenge available for this chapter: [To-do List](challenges/to-do-list/to-do-list-challenge.md)
 
-## Exceptions
+# Exceptions
 
 Exceptions are classes for handling exceptional events. Unexpected behaviour or events, most often (but not always) are errors. Error exceptions can be thrown as, for instance, `SyntaxError`s or `NoMethodError`s.
 
@@ -1444,6 +1445,8 @@ end
 ```
 
 Further extending custom exception can be used to keep a log of what when wrong in a script. The log could then be saved to a file for later reference.
+
+> There's a challenge available for this chapter: [Custom Exceptions](challenges/custom-exceptions/custom-exceptions-challenge.md)
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
