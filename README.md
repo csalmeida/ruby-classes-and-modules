@@ -40,6 +40,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
 - [Exceptions](#exceptions)
   - [Handle Exceptions](#handle-exceptions)
   - [Handle Specific Exceptions](#handle-specific-exceptions)
+  - [Exception Methods](#exception-methods)
 - [Further Resources](#further-resources)
 </details>
 
@@ -1227,6 +1228,53 @@ begin
 rescue Exception
   puts "Puts every exception is handled"
   puts "Even those Ruby uses internally to work"
+end
+```
+
+## Exception Methods
+
+The `Exception` class contains a multitude of methods that can be used alongside `rescue` to aid in exception handling.
+
+The first step is to hold an instance of `Exception` in a local variable (usually named `e`) using the hash rocket sign `=>`. Assigning the exception to a variable allows it to be used inside the rescue block, and methods can be called on them:
+
+```ruby
+# exceptions/exceptions_methods.rb
+begin
+  1 / 0
+rescue ZeroDivisionError => e
+  puts "#{e.class} handled"
+rescue => e
+  puts "#{e.class} handled"
+end
+```
+
+In the example above, the first rescue block will always print `ZeroDivision handled`, as the block only handles a single exception.
+
+The subsequent block handles all `StandardError` exceptions and could print for instance a `TypeError` or an `ArgumentError` when using `e.class`.
+
+There is a choice of methods that can be run on an `Exception` instance, consult Ruby's documentation for further notes:
+
+|  Methods  |  Description  |
+| ------------- |:-------------:|
+| `Exception#class`    | Useful to understand which exception was raised and when handling each exception a different way within a `rescue` |
+| `Exception#message`      | Short error message that points out what went wrong. |
+| `Exception#backtrace`   | Returns the path the code has taken through various files and method calls. can be useful to trackdown issues that occur when coding a script. |
+| `Exception#full_message`   | Combines `Exception#class`, `Exception#message` and `Exception#backtrace` into a single message. |
+
+Methods listed above can all be used inside a `rescue` block:
+
+```ruby
+#exceptions/exception_methods.rb
+def divide(x,y)
+  x / y
+
+  rescue ZeroDivisionError => e
+    puts "ZeroDivisionError handled when dividing #{x} with #{y}"
+    puts "Backtrace: #{e.backtrace}"
+  rescue TypeError => e
+    puts "TypeError handled: #{e.message}"
+  rescue => e
+    puts "#{e.class} handled"
 end
 ```
 
