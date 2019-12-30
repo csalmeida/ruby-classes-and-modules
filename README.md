@@ -1449,6 +1449,7 @@ Further extending custom exception can be used to keep a log of what when wrong 
 > There's a challenge available for this chapter: [Custom Exceptions](challenges/custom-exceptions/custom-exceptions-challenge.md)
 
 # Further Resources
+- [Ruby Fundamentals](https://github.com/csalmeida/ruby-fundamentals)
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
 - [Ruby Monstas: Ruby for beginners](http://ruby-for-beginners.rubymonstas.org/index.html)
 - [Ruby on Rails](https://rubyonrails.org/)
