@@ -4,8 +4,11 @@ def divide(x,y)
   puts x / y
 rescue ZeroDivisionError
   puts "Cannot divide by zero"
+  puts "#{e.class}: #{e.message}"
 rescue TypeError
   puts "Requires two integer arguments"
+rescue => e
+  puts "#{e.class} handled"
 end
 
 divide(4,2)
