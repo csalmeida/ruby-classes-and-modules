@@ -42,6 +42,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Handle Specific Exceptions](#handle-specific-exceptions)
   - [Exception Methods](#exception-methods)
   - [Raise Exceptions](#raise-exceptions)
+  - [Custom Exceptions](#custom-exceptions)
 - [Further Resources](#further-resources)
 </details>
 
@@ -1329,6 +1330,120 @@ end
 ```
 
 The `raise "Too loud!"` statement raises an `RuntimeError` exception by default and is taking a message as its argument. This exception is rescued later on inside a `begin` and `end` block.
+
+## Custom Exceptions
+
+Custom exceptions can be defined by inheriting from on of Ruby's exception sub-classes.
+
+```ruby
+class TooLoudError < StandardError
+end
+```
+
+To `raise` a custom exception, the statement is written the same way as any other exception:
+
+```ruby
+class Radio
+  attr_accessor :volume
+
+  def volume=(value)
+    if value < 1 || value > 10
+      raise TooLoudError
+    end
+    @volume = value
+  end
+end
+
+begin
+  radio = Radio.new
+  radio.volume = 20
+rescue TooLoudError
+  puts "Too Loud!"
+end
+```
+
+The custom exception class may then be extended with methods or some functionality may be overriden from it's parent class. In this case `StandardError#message` is overriden with `TooLoudError#message`:
+
+```ruby
+class TooLoudError < StandardError
+  def message
+    "Too loud!"
+  end
+end
+```
+
+However, most of the time it is probably desired to set the message as soon as a custom exception is instantiated:
+
+```ruby
+# exceptions/custom_exceptions.rb
+class TooLoudError < StandardError
+  def initialize(msg=nil)
+    super(msg || "Too loud!")
+  end
+end
+```
+
+Using `super` will let the parent class set the message. However if no message is passed in, `"Too loud!"` will be set instead:
+
+```ruby
+# exceptions/custom_exceptions.rb
+class Radio
+  attr_accessor :volume
+
+  def volume=(value)
+    if value < 1 || value > 10
+      raise TooLoudError
+    end
+    @volume = value
+  end
+end
+
+begin
+  radio = Radio.new
+  radio.volume = 20
+rescue TooLoudError => e
+  puts e.message
+end
+```
+
+Custom exceptions can be further developed to have other behavior or relevant values. In the example below `TooLoudError` is extended to receive a `volume` argument, which can later be used when handling the exception:
+
+```ruby
+# exceptions/custom_exceptions.rb
+class TooLoudError < StandardError
+  attr_reader :volume
+
+  def initialize(value, msg=nil)
+    super(msg || "Too loud!")
+    @volume = value
+  end
+end
+```
+
+Now the `TooLoudError` exception will be aware of what volume was being set when raised:
+
+```ruby
+# exceptions/custom_exceptions.rb
+class Radio
+  attr_accessor :volume
+
+  def volume=(value)
+    if value < 1 || value > 10
+      raise TooLoudError.new(value)
+    end
+    @volume = value
+  end
+end
+
+begin
+  radio = Radio.new
+  radio.volume = 20
+rescue TooLoudError => e
+  puts "Volume #{e.volume}: #{e.message}"
+end
+```
+
+Further extending custom exception can be used to keep a log of what when wrong in a script. The log could then be saved to a file for later reference.
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
