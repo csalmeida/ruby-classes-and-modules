@@ -41,6 +41,7 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
   - [Handle Exceptions](#handle-exceptions)
   - [Handle Specific Exceptions](#handle-specific-exceptions)
   - [Exception Methods](#exception-methods)
+  - [Raise Exceptions](#raise-exceptions)
 - [Further Resources](#further-resources)
 </details>
 
@@ -1277,6 +1278,57 @@ def divide(x,y)
     puts "#{e.class} handled"
 end
 ```
+
+## Raise Exceptions
+
+Ruby will raise exceptions when code goes wrong. Additionally exceptions can alse be intentionally raised in custom Ruby scripts.
+
+This can be achieved either by using Ruby's built-in exception classes or by writting custom exceptions.
+
+The `Exception` class has a list of subclasses available in [Ruby's documentation](https://ruby-doc.org/core-2.7.0/Exception.html).
+
+When raising an exception, the developer can pick which exception is being raised from that list of subclasses. However, the default is `RuntimeError` if no particular exception is specified:
+
+```ruby
+# exceptions/raise_exceptions.rb
+def even_numbers(array)
+  unless array.is_a?(Array)
+    raise ArgumentError
+  end
+
+  if array.length == 0
+    raise StandardError.new("Too few elements: #{array.length}")
+  end
+
+  array.find_all {|item| item.to_i % 2 == 0}
+end
+```
+
+The example above will raise an `ArgumentError` exception when the data type of its argument is not an `Array`. It will also raise a `StandardError` exception for when the array provided is empty. `StandardError.new` takes in a message which will print to the console when the exception is raised.
+
+In previous examples, a `Radio` class has been used. In it's volume method it wouldn't return anything unless the volume was between `1` and `10`. An exception could be raised here:
+
+```ruby
+class Radio
+  attr_accessor :volume
+
+  def volume=(value)
+    if value < 1 || value > 10
+      raise "Too loud!"
+    end
+    @volume = value
+  end
+end
+
+begin
+  radio = Radio.new
+  radio.volume = 20
+rescue RuntimeError => e
+  puts e.message
+end
+```
+
+The `raise "Too loud!"` statement raises an `RuntimeError` exception by default and is taking a message as its argument. This exception is rescued later on inside a `begin` and `end` block.
 
 # Further Resources
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
