@@ -924,9 +924,7 @@ The `Time` class tends to be the most useful class when working with dates and t
 
 # Modules
 
-Modules are wrappers around Ruby code like Classes. However, unlike classes, modules cannot be instantiated.
-
-Modules are typically used in use for namespacing and in mixins.
+Modules are wrappers around Ruby code like Classes. However, unlike classes, modules cannot be instantiated. Modules are typically used for namespacing and in mixins.
 
 ## Namespacing
 
