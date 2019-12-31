@@ -1451,5 +1451,6 @@ Further extending custom exception can be used to keep a log of what when wrong 
 # Further Resources
 - [Ruby Fundamentals](https://github.com/csalmeida/ruby-fundamentals)
 - [Ruby: Classes and Modules - LinkedIn Learning](https://www.linkedin.com/learning/ruby-classes-and-modules/class-attributes)
+- [Ruby: Files, Formats, Templates - LinkedIn Learning](https://www.linkedin.com/learning/ruby-files-formats-templates/)
 - [Ruby Monstas: Ruby for beginners](http://ruby-for-beginners.rubymonstas.org/index.html)
 - [Ruby on Rails](https://rubyonrails.org/)
