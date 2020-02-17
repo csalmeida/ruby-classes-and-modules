@@ -1452,3 +1452,4 @@ Further extending custom exception can be used to keep a log of what when wrong 
 - [Ruby: Files, Formats, Templates - LinkedIn Learning](https://www.linkedin.com/learning/ruby-files-formats-templates/)
 - [Ruby Monstas: Ruby for beginners](http://ruby-for-beginners.rubymonstas.org/index.html)
 - [Ruby on Rails](https://rubyonrails.org/)
+- [Ruby API Documentation](https://rubyapi.org/)
