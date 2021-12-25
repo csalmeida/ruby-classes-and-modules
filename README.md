@@ -49,9 +49,9 @@ This document expands on [Ruby's](https://www.ruby-lang.org) features, focusing 
 
 # Getting Started
 
-This repository follows [Kevin Skoglund's Ruby Classes and Modules course](https://www.linkedin.com/learning/ruby-classes-and-modules/learn-to-use-custom-classes-in-ruby) and makes use of concepts mentioned on the [Ruby Fundamentals]() repo.
+This repository follows [Kevin Skoglund's Ruby Classes and Modules course](https://www.linkedin.com/learning/ruby-classes-and-modules/learn-to-use-custom-classes-in-ruby) and makes use of concepts mentioned on the [Ruby Fundamentals](https://github.com/csalmeida/ruby-fundamentals) repo.
 
-To get started Ruby needs to be installed on the machine:
+To get started, Ruby needs to be installed on the machine:
 ```
 ruby -v 
 ```
@@ -73,7 +73,7 @@ The important concept of OOP is likely to be classes. This section will look at 
 
 A class defines code grouped by a common theme or purpose that provides a template of the state and behavior of objects created from it.
 
-Objects that exist in Ruby have classes as well such as 'Integer', 'String', 'Symbol', the 'NilClass' and many more.
+Objects that exist in Ruby have classes as well, such as 'Integer', 'String', 'Symbol', the 'NilClass' and many more.
 
 Ruby can be asked what class an object belongs to by using the `class` method:
 
@@ -117,7 +117,7 @@ Additionally, [the Ruby path](https://github.com/csalmeida/ruby-fundamentals#bes
 
 ## Instances
 
-An instance is a single object that is created from a class definition. For example assigning a `String` to a variable is creating a new instance of the `String` class:
+An instance is a single object that is created from a class definition. For example, assigning a `String` to a variable is creating a new instance of the `String` class:
 
 ```ruby
 # classes/instances.rb
@@ -182,7 +182,7 @@ It might be easier to think of it as properties in some cases, as for instance a
 
 A house might have *two rooms* and *one bathroom* but other might have a different number of rooms and bathrooms. These are all properties a house can have but in Ruby they are called attributes.
 
-Attributes will be stored inside instance variables and are set using [variable scope indicators](https://github.com/csalmeida/ruby-fundamentals#variable-scope-indicators).
+Attributes will be stored inside **instance variables** and are set using [variable scope indicators](https://github.com/csalmeida/ruby-fundamentals#variable-scope-indicators).
 
 ```ruby
 # classes/attributes.rb
@@ -364,7 +364,7 @@ Using `self` boils down to a few points:
 
 - Use `self` to reference the current instance from inside the instance.
 - Add `self` when calling writer methods (`self.first_name=`)
-  - Helps Ruby understand that it is calling a method.
+  - Helps Ruby understand whether it is calling a method.
 - Omit `self` when calling any other method (`first_name`)
 - Including `self` is always going to be the safest choice.
 
