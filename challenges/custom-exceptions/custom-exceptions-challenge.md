@@ -2,11 +2,11 @@
 
 Pick one of the previous challenges from the other sections or use one of the solutions of one of them, available  in this repository:
 
-- [Dice](challenges/dice/dice-challenge.md)
-- [Radio](challenges/radio/radio-challenge.md)
-- [Secure Radio](challenges/secure-radio/secure-radio-challenge.md)
-- [Birthdate Analysis](challenges/birth-date-analysis/birth-date-analysis-challenge.md)
-- [Todo List](challenges/to-do-list/to-do-list-challenge.md)
+- [Dice](../dice/dice-challenge.md)
+- [Radio](../radio/radio-challenge.md)
+- [Secure Radio](../secure-radio/secure-radio-challenge.md)
+- [Birthdate Analysis](../birth-date-analysis/birth-date-analysis-challenge.md)
+- [Todo List](../to-do-list/to-do-list-challenge.md)
 
 Once decided, find an appropriate place in that project, to use a custom exception class.
 
