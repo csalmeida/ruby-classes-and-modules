@@ -19,7 +19,7 @@ def each
 end
 ```
 
-3. Allow an instance of a list to be created, with each item being a list. A list may be initialized with a few items, passed in as an array:
+3. Allow an instance of a list to be created, with each item being in the list. A list may be initialized with a few items, passed in as an array:
 
 ```ruby
 list = ToDoList.new(['dishes', 'nap', 'laundry', 'vaccum'])

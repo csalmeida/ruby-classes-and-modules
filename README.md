@@ -1129,7 +1129,7 @@ end
 
 The code which could raise an exception is put under the `begin` keyword, and code that handles the exception is put under the `rescue` keyword.
 
-The code is really put between a `begin` and `end` block and aids in letting Ruby know that `rescue` applies to all code in that block.
+The code is really put between a `begin` and `end` block and helps letting Ruby know that `rescue` applies to all code in that block.
 
 If anything goes wrong anywhere in that block, Ruby will jump to the `rescue` line and run the code there instead. It could run another method, or it could return another error message instead.
 
@@ -1281,7 +1281,7 @@ end
 
 ## Raise Exceptions
 
-Ruby will raise exceptions when code goes wrong. Additionally exceptions can alse be intentionally raised in custom Ruby scripts.
+Ruby will raise exceptions when code goes wrong. Additional exceptions can also be raised intentionally in custom Ruby scripts.
 
 This can be achieved either by using Ruby's built-in exception classes or by writting custom exceptions.
 
