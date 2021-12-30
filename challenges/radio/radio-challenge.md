@@ -57,7 +57,7 @@ Test the following:
 The program can optionally be extended:
 
 - Allow changing the radio band, the `Radio` class is currently designed to instantiate one or the other so it will require a few changes.
-- A `switch_band` method might be helpful to handle logic when changing bands can keeping the frequency range correct.
+- A `switch_band` method might be helpful to handle logic when changing bands can help keeping the frequency range correct.
 - When switching bands the last frequency used could be remembered when switching over, instead of defaults.
 - Create a separate `Tuner` class and add all frequency related logic to it. then a `Radio` would instantiate its `Tuner` to handle changing stations.
 - For example `radio.tuner.freq` and `radio.tuner.freq = 101.1`.

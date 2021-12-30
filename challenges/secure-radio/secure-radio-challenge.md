@@ -1,6 +1,6 @@
 # Challenge: Secure Radio 📻🔒
 
-This challenge is to create a secure radio, which return an encrypted audio stream.
+This challenge is to create a secure radio, which returns an encrypted audio stream.
 
 # Part 1
 
@@ -32,7 +32,7 @@ In the example below a shift of `3` is applied so `A` will become `D`.
 With a shift of 3: A => D, B => E, C => F, D => G
 ```
 
-Create a `ShiftCipher` class to be used when encrypted the stream.
+Create a `ShiftCipher` class to be used when encrypting the stream.
 
 Add a `ShiftCipher.encode(plain_string, 3)` class method that encrypts the strings. It takes a plain string, in this case, it would be the `SecureRadio#audio_stream`, and an `integer` of how much a character should be shifted by.
 

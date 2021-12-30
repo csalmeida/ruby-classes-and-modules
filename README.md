@@ -69,7 +69,7 @@ Classes provide templates for creating objects or instances of a class that have
 
 # Classes
 
-The important concept of OOP is likely to be classes. This section will look at defining custom classes.
+An important concept of OOP is likely to be classes. This section will look at defining custom classes.
 
 A class defines code grouped by a common theme or purpose that provides a template of the state and behavior of objects created from it.
 
@@ -112,7 +112,7 @@ Classes can have _attributes_ which hold the current state of an object and _met
 Additionally, [the Ruby path](https://github.com/csalmeida/ruby-fundamentals#best-practices) does not need to be added to class files, only to the main script file:
 
 ```ruby
-#!/usr/bin/env ruby
+#! /usr/bin/env ruby
 ```
 
 ## Instances
@@ -180,7 +180,7 @@ Attributes can be seen as properties of an object and in some programming langua
 
 It might be easier to think of it as properties in some cases, as for instance a car could be *green*. Green is a property of a car but it could be any other color and different cars will have other colors.
 
-A house might have *two rooms* and *one bathroom* but other might have a different number of rooms and bathrooms. These are all properties a house can have but in Ruby they are called attributes.
+A house might have *two rooms* and *one bathroom* but others might have a different number of rooms and bathrooms. These are all properties a house can have but in Ruby they are called attributes.
 
 Attributes will be stored inside **instance variables** and are set using [variable scope indicators](https://github.com/csalmeida/ruby-fundamentals#variable-scope-indicators).
 
@@ -260,7 +260,7 @@ pig.noise = 'Oink, oink!'
 pig.noise # Oink, oink!
 ```
 
-Ruby is aware that it is a method despite being called this way. It one of these methods is left out it would create a case where an instance variable is either read only or write only.
+Ruby is aware that it is a method despite being called this way. If one of these methods is left out it would create a case where an instance variable is either read only or write only.
 
 ### Attribute Methods
 
@@ -362,11 +362,11 @@ When setting a value, `self` is used to make it clear to Ruby that the value is 
 
 Using `self` boils down to a few points:
 
-- Use `self` to reference the current instance from inside the instance.
+- Use `self` to reference the current instance from inside the class definition.
 - Add `self` when calling writer methods (`self.first_name=`)
-  - Helps Ruby understand whether it is calling a method.
+  - Helps Ruby understand whether it is calling a set method.
 - Omit `self` when calling any other method (`first_name`)
-- Including `self` is always going to be the safest choice.
+- When in doubt, including `self` is always going to be the safest choice.
 
 ## Method Access Control
 
@@ -374,7 +374,7 @@ Methods are the primary interfaces to a class, they can be used to set values an
 
 This is where access control comes in, restricts access to methods from outside an instance. It defines which methods are callable and which ones aren't.
 
-There are three level of method access control:
+There are three levels of method access control:
 
 |    Access control level |    Description    |
 | ------------- |:-------------:|
@@ -382,7 +382,7 @@ There are three level of method access control:
 | **protected**      | Can only be called by instances of the class and its subclasses |
 | **private**   | Can only be called by instances of a class |
 
-> The focus of this section will be on `public` and `private` access for not as `protected` is better covered when class inheritance in introduced.
+> The focus of this section will be on `public` and `private` access as `protected` is better covered when class inheritance in introduced.
 
 One method can be made `private` by adding the keyword above them to a class. It only needs to be added once and will make any methods below restricted to run inside the class only:
 
@@ -447,7 +447,7 @@ When defining classes it is important to think about the access control of its m
 
 ## Initialize Method
 
-The `initialize` method can be used to instantiate objects with default or customizations. It is called automatically whenever a new instance of a class is created. For example, is `Animal.new` is called, `initialize` will be called with it. 
+The `initialize` method can be used to instantiate objects with default or customizations. It is called automatically whenever a new instance of a class is created. For example, when `Animal.new` is called, `initialize` will be called with it. 
 
 ```ruby
 # classes/initialize_method.rb
@@ -461,7 +461,7 @@ class Animal
 end
 ```
 
-It is useful to set attributes to a default or specific state. this is done by passing arguments to the `new` method which get passed on to the `initialize` method. Typically, this is done using an `options` hash.
+It is useful to set attributes to a default or specific state. This is done by passing arguments to the `new` method which get passed on to the `initialize` method. Typically, this is done using an `options` hash.
 
 ```ruby
 # classes/initialize_method.rb
@@ -478,15 +478,15 @@ puts pig.noise
 
 # Class Attributes and Methods
 
-This sections will introduce class attributes and methods. These are different to instance attributes and methods since they can run with a class without it being instantiated.
+Subsequent sections will introduce class attributes and methods. These are different to instance attributes and methods since they can run without a class being instantiated.
 
 ## Class Methods
 
 Class methods are used to define behaviors related to a class generally and not a specific instance. These methods are called directly on the class, not an instance.
 
-An example is the `new` method. When `Animal.new` is called there is not instance yet. The `new` method is a class method that is being called directly on the `Animal` class.
+An example is the `new` method. When `Animal.new` is called an instance hasn't been created yet. The `new` method is a class method that is being called directly on the `Animal` class.
 
-Perhaps a more practical example would be `Bicycle.all_brands`. Calling this method would likes all brands a bicycle can have. However, an instance only has one. The `all_brands` methods does not apply to a specific bicycle but returns information of what brand one might have.
+Perhaps a more practical example would be `Bicycle.all_brands`. Calling this method would list all brands a bicycle can have. However, an instance only has one. The `all_brands` method does not apply to a specific bicycle but returns information of what brand one might have.
 
 To define a *class method*, `self` is added to the method name. The name of the class would also work but most *Rubyists* would prefer `self`.
 
@@ -509,7 +509,7 @@ end
 puts Animal.list_classes
 ```
 
-The class method returns array of [classes an animal can belong to](https://en.wikipedia.org/wiki/List_of_animal_classes), and can be called on the `Animal` class itself without the using an instance.
+The class method returns array of [classes an animal can belong to](https://en.wikipedia.org/wiki/List_of_animal_classes), and can be called on the `Animal` class itself without using an instance.
 
 A common pattern is to use class methods to create instances of class with custom values. This is called the factory pattern:
 
@@ -550,7 +550,7 @@ In Ruby documentation there is a convention for referencing both class and insta
 - Class method: `Array.new`
 - Instance method: `Array#size`
 
-This only applies to documentation and dot notation should be used on both bases when writing Ruby scripts.
+This only applies to documentation and dot notation should be used on both cases when writing Ruby scripts.
 
 ## Class Attributes
 
@@ -573,7 +573,7 @@ end
 Animal.species # 
 ```
 
-A class attributes is defined and a class method is used to return its value. Class attributes can also be used to track how many instances of a class were created:
+A class attribute is defined and a class method is used to return its value. Class attributes can also be used to track how many instances of a class were created:
 
 ```ruby
 # class-attributes-and-methods/class_attributes.rb
@@ -606,7 +606,7 @@ Animal.current_animals # [#<Animal:0x00007fd0292a83d8>,#<Animal:0x00007fd0292a83
 
 Class read/write methods are similar to [instance read/write methods](#read/write-methods). However, there are not equivalent to `attr_*` methods except on the [Ruby on Rails](https://rubyonrails.org/) framework as the `cattr_*` but not on Ruby yet. This could be because they're not used that often.
 
-Read/write methods are defined almost the same way as instance read/write methods with the different of class ones using the `self` keyword:
+Read/write methods are defined almost the same way as instance read/write methods with the difference of class ones making use of the `self` keyword:
 
 ```ruby
 # class-attributes-and-methods/class_read_write_methods.rb
@@ -769,7 +769,7 @@ Additionally, `super` can be assigned to a variable, for example `x = super`. If
 
 # Dates and Times
 
-Date and time based classes are useful in Ruby and when writting program in general, section is an introduction to these classes.
+Date and time based classes are useful in Ruby and when writting program in general, this section is an introduction to these classes.
 
 ## Time
 
@@ -777,7 +777,7 @@ Times are stored as the number of seconds since January 1st, 1970. Otherwise kno
 
 All times include fractions of a second which is important for comparisons.
 
-The fastest way to get the current time in Ruby is using `Time.now` class. It will return the current time with the default format. Alternatively, a Unix timestamp can also be retrieved.
+The fastest way to get the current time in Ruby is using the `Time.now` class method. It will return the current time with the default format. Alternatively, a Unix timestamp can also be retrieved.
 
 ```ruby
 # dates-and-times/time.rb
@@ -1060,7 +1060,7 @@ When splitting scripts in multiple files and coding with the DRY (Don't Repeat Y
 
 There are three ways of adding code from another file or module into scripts, `load`, `require` and `include`.
 
-`load`, loads a source file everytime it is called and it returns a boolean on whether the file was loaded successfully. However, it does 
+`load`, loads a source file everytime it is called and it returns a boolean on whether the file was loaded successfully.
 
 It is not used very often since `require` is more frequently.
 
